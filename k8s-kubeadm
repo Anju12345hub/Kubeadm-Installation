@@ -36,3 +36,4 @@ kubeadm reset pre-flight checks
 ---------------------------------------on Master Node-----------------------------------------
 
 kubectl get nodes 
+----> add port number (6443) on the SG's inbound rule

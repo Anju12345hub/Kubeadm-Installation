@@ -10,3 +10,29 @@ Run as root:-
 - sudo apt update -y
 - sudo apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
 - apt install docker.io -y
+
+--------------------------------------------- Master Node -------------------------------------------------- 
+Run as root:-
+sudo su
+
+kubeadm init
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+
+kubeadm token create --print-join-command
+  
+  
+------------------------------------------- Worker Node ------------------------------------------------ 
+Run as root:-
+sudo su
+
+kubeadm reset pre-flight checks
+-----> Paste the Join command on worker node with `--v=5`
+
+---------------------------------------on Master Node-----------------------------------------
+
+kubectl get nodes 
